@@ -21,17 +21,10 @@ int main() {
         escolha[0] = escolha[0] -32;
         for (int i = 0; i < 3; i++) {
             if (strcmp(escolha, opcoes[i]) == 0) {
-                printf("Você escolheu: %s \n", opcoes[i]);
                 break;
-            }else {
-                printf("Opção inválida, encerrando o jogo.\n");
-                return 0; // A string não pertence à cadeia
             }
         }
-        printf("Computador escolheu: %s\n", opcoes[escolha_computador]);
-    
-        
-            
+       
         if (escolha[2] == opcoes[0][2]){
             printf("Você escolheu: %s - Computador escolheu %s\n", opcoes[0] , opcoes[escolha_computador]);
             escolha_pessoa = *opcoes[0] - 'P';
@@ -66,8 +59,6 @@ int main() {
             printf("Opção inválida, encerrando o jogo.\n");
             confirmacao = 1;
         }
-        
-
     }
     printf("Fim do jogo!\n");
 }
