@@ -2,10 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-/*
-criar um void para mover cada peça
 
-*/
+
 void Letra_M (char palavra[]){ //torna a primeira letra maiuscula se for minuscula
     if (palavra[0] >= 'a' && palavra[0] <= 'z'){
         palavra[0] = palavra[0] -32;
@@ -141,63 +139,64 @@ int main() { //xadrez
     int confirmacao = 0;
     char *mov_inicial;
     printf("bem vindo ao jogo de xadrez\n");
-    while (confirmacao == 0) {   
-
-        int mover, mover_cav_1, mover_cav_2, resul_cav_1 , resul_cav_2 ;
-        int peca_mover;
+    while (confirmacao == 0) {    //repetição para pemanecer no jogo
+        // cria variáveis para armazenar as entradas do usuário
+        int mover, peca_mover;
         char peca[10];
-        
         char movimento[10];
         char direcao_cav_1[10];
         char direcao_cav_2[10];
         char cor[10];
+        // cria vetores de strings para as peças, movimentos e cores
         char *pecas[] = {"Peão", "Torre", "Bispo", "Cavalo", "Rainha", "Rei"};
         char *movimentos[] = {"Cima", "Baixo", "Esquerda", "Direita", "Diagonal"};
         char *cores[] = {"Branco", "Preto"};
 
         printf("Escolha uma peça:\n");
-        for(int i = 0; i < 6; i++) {
+        for(int i = 0; i < 6; i++) { //printando as strings dentro da array
             printf("%s\n", pecas[i]);
         }
         printf("Digite sua escolha: ");
         scanf("%s", &*peca);
         printf("Escolha uma direção:\n");
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 5; i++) {  //printando as strings dentro da array
             printf("%s\n", movimentos[i]);
         }
         printf("Digite sua escolha: ");
         scanf("%s", &movimento);
         printf("Escolha uma cor:\n");
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 2; i++) { //printando as strings dentro da array
             printf("%s\n", cores[i]);
         }
         printf("Digite sua escolha: ");
         scanf("%s", &*cor);
-        
+        //chama a função Letra_M para tornar a primeira letra maiúscula
         Letra_M(peca);
         Letra_M(movimento);
         Letra_M(cor);
+
         if(Test_Pala(peca, pecas, sizeof(pecas)/sizeof(pecas[0]))&&
            Test_Pala(movimento, movimentos, sizeof(movimentos)/sizeof(movimentos[0]))&&
-           Test_Pala(cor, cores, sizeof(cores)/sizeof(cores[0]))){
+           Test_Pala(cor, cores, sizeof(cores)/sizeof(cores[0]))){                      //testa todas as entradas ate o momento
             printf("Você escolheu: %s da cor %s para %s\n", peca, cor , movimento);
-        }else{
+        }else{                                                                          //informa se a entrada é invalida
             printf("Você escolheu %s, %s ou %s que é uma opção inválida.\n", peca,cor, movimento);
             return 0;
         }
         printf("Quantas casas deseja andar?");
         scanf("%d", &mover);
-        peca_mover = Test_Peca(peca, pecas, sizeof(pecas)/sizeof(pecas[0]));
-        if(Test_Mov(movimento, movimentos, peca_mover, mover) == 0){
+        peca_mover = Test_Peca(peca, pecas, sizeof(pecas)/sizeof(pecas[0]));    //recebe o valor do local da peça escolhida
+        if(Test_Mov(movimento, movimentos, peca_mover, mover) == 0){            //testa se o movimento da peça é valido
             return 0;
         }else{
             printf("Você escolheu andar %d casas para %s com %s %s que é uma opção válida.\n", mover, movimento, peca, cor);   
         }
-        //comentar a ação
+        //imprime o resultado do movimento
         for (int i = 0; i < mover; i++){
             printf("Você moveu a peça %s %s para a %s\n", peca, cor , movimento);
         }
         
+        //pergunta se o usuario quer continuar jogando recebe e valida a resposta e envia para o loop
         printf("Deseja continuar jogando? (sim/não): ");
         scanf("%s", &saida);
         Letra_M(saida);

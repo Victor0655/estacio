@@ -8,13 +8,13 @@ int main() {
     char *saida;
     int confirmacao = 0;
     printf("bem vindo ao jogo de Joken Po\n");
-    while (confirmacao == 0) {        
+    while (confirmacao == 0) {        // cria um loop para executar o codigo mais de uma vez  
         srand(time(NULL)); 
         
-        int escolha_pessoa, escolha_computador = rand() % 3 ;
-        char escolha[10];
-        char *opcoes[] = {"Pedra", "Papel", "Tesoura"};
-
+        int escolha_pessoa, escolha_computador = rand() % 3 ; // gera um numero aleatorio entre 0 e 2 e cria a variavel da escolha pessoa
+        char escolha[10]; // cria um vetor de char para armazenar a escolha do usuario
+        char *opcoes[] = {"Pedra", "Papel", "Tesoura"}; // cria um vetor de strings com as opcoes do jogo
+        //imprime,recebe e valida a escolha do usuario 
         printf("Escolha uma opção:\nPedra\nPapel\nTesoura\n");
         printf("Digite sua escolha: ");
         scanf("%s", &*escolha);
@@ -24,7 +24,8 @@ int main() {
                 break;
             }
         }
-       
+
+       //imprime a escolha do computador e a escolha do usuario 
         if (escolha[2] == opcoes[0][2]){
             printf("Você escolheu: %s - Computador escolheu %s\n", opcoes[0] , opcoes[escolha_computador]);
             escolha_pessoa = *opcoes[0] - 'P';
@@ -40,6 +41,7 @@ int main() {
             return 0;
         }
         
+        //imprime o resultado do jogo
         if (escolha_pessoa == escolha_computador){
             printf("Empate!\n");
         }else if ((escolha_pessoa > escolha_computador)||(escolha_pessoa == 0 && escolha_computador == 2)){
@@ -47,6 +49,7 @@ int main() {
         }else{
             printf("Você perdeu!\n");
         }
+        //pergunta se o usuario quer continuar jogando recebe e valida a resposta e envia para o loop
         printf("Deseja continuar jogando? (sim/não): ");
         scanf("%s", &*saida);
         if (saida[0] == 'n'){
